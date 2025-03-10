@@ -9,8 +9,8 @@ namespace WebApiWM
 {
     public interface IAuthService
     {
-        R_User Authenticate(string username, string password);
-        R_User AuthenticateWith2FA(string username, string token);
+        R_User Authenticate(string email, string password);
+        R_User AuthenticateWith2FA(string email, string token);
     }
 
 
@@ -23,11 +23,11 @@ namespace WebApiWM
             _context = context;
         }
 
-        public R_User Authenticate(string username, string password)
+        public R_User Authenticate(string email, string password)
         {
             // Ищем пользователя в базе данных
             var пользователь = _context.Пользователи
-                .SingleOrDefault(u => u.ИмяПользователя == username && u.ХэшПароля == password);
+                .SingleOrDefault(u => u.Email == email && u.ХэшПароля == password);
 
             if (пользователь == null)
                 return null;
@@ -36,11 +36,11 @@ namespace WebApiWM
             return new R_User(пользователь);
         }
 
-        public R_User AuthenticateWith2FA(string username, string token)
+        public R_User AuthenticateWith2FA(string email, string token)
         {
             // Ищем пользователя в базе данных
             var пользователь = _context.Пользователи
-                .SingleOrDefault(u => u.ИмяПользователя == username);
+                .SingleOrDefault(u => u.Email == email);
 
             // Проверяем токен (здесь должна быть логика проверки 2FA)
             if (пользователь == null || token != "valid_2fa_token")

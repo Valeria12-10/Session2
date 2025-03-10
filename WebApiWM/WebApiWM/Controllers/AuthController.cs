@@ -22,7 +22,7 @@ namespace WebApiWM.Controllers
         [System.Web.Http.Route("login")]
         public IHttpActionResult Login([FromBody] LoginRequest request)
         {
-            var user = _authService.Authenticate(request.Username, request.Password);
+            var user = _authService.Authenticate(request.Email, request.Password);
             if (user == null)
                 return Unauthorized();
 
@@ -33,7 +33,7 @@ namespace WebApiWM.Controllers
         [System.Web.Http.Route("login-2fa")]
         public IHttpActionResult LoginWith2FA([FromBody] Login2FARequest request)
         {
-            var user = _authService.AuthenticateWith2FA(request.Username, request.Token);
+            var user = _authService.AuthenticateWith2FA(request.Email, request.Token);
             if (user == null)
                 return Unauthorized();
 
