@@ -25,6 +25,6 @@ namespace WebApiWM.Models
         public string ЕдиницаИзмерения { get; set; }
         public decimal Цена { get; set; }
         public string СерийныйНомер { get; set; }
-        public Nullable<int> МинимальныйЗапас { get; set; }
+        public int? МинимальныйЗапас { get; set; }
     }
 }

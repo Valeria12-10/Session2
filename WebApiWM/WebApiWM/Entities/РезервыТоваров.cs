@@ -12,15 +12,15 @@ namespace WebApiWM.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Пользователи
+    public partial class РезервыТоваров
     {
-        
-
-        public int IDПользователя { get; set; }
-        public string ИмяПользователя { get; set; }
-        public string Email { get; set; }
-        public string ХэшПароля { get; set; }
-        public string Роль { get; set; }
-        public byte[] Фото { get; set; }
+        public int IDРезерва { get; set; }
+        public int IDЗаказа { get; set; }
+        public int IDТовара { get; set; }
+        public int КоличествоРезерва { get; set; }
+        public System.DateTime ДатаРезерва { get; set; }
+    
+        public virtual Заказы Заказы { get; set; }
+        public virtual Товары Товары { get; set; }
     }
 }

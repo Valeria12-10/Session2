@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
 using System.Web.Http.Description;
-using WebApiWM.Entities;
+using System.Web.Http;
+using System.Web.Mvc;
 using WebApiWM.Models;
+using WebApiWM.Entities;
 
 namespace WebApiWM.Controllers
 {
     public class WarehouseController : ApiController
     {
-        private WarehouseManagementEntities db = new WarehouseManagementEntities();
+        private СкладыEntities db = new СкладыEntities();
 
         // GET: Warehouse
         [ResponseType(typeof(List<Warehouse>))]

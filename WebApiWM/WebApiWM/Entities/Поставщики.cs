@@ -17,6 +17,7 @@ namespace WebApiWM.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Поставщики()
         {
+            this.Заказы = new HashSet<Заказы>();
             this.ПриходныеНакладные = new HashSet<ПриходныеНакладные>();
         }
     
@@ -28,6 +29,8 @@ namespace WebApiWM.Entities
         public string КонтактныйEmail { get; set; }
         public string Адрес { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Заказы> Заказы { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ПриходныеНакладные> ПриходныеНакладные { get; set; }
     }

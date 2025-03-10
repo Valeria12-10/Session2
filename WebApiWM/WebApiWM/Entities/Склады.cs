@@ -18,6 +18,8 @@ namespace WebApiWM.Entities
         public string Название { get; set; }
         public string Адрес { get; set; }
         public string ТипСклада { get; set; }
-        public string ЗоныХранения { get; set; }
+        public string ЗонаХранения { get; set; }
+        public Nullable<int> IDТовара { get; set; }
+        public Nullable<int> Количество { get; set; }
     }
 }

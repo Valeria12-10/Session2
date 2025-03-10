@@ -12,24 +12,28 @@ namespace WebApiWM.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Клиенты
+    public partial class Заказы
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Клиенты()
+        public Заказы()
         {
-            this.Заказы = new HashSet<Заказы>();
-            this.РасходныеНакладные = new HashSet<РасходныеНакладные>();
+            this.РезервыТоваров = new HashSet<РезервыТоваров>();
+            this.ЭлементыЗаказа = new HashSet<ЭлементыЗаказа>();
         }
     
-        public int IDКлиента { get; set; }
-        public string Название { get; set; }
-        public string КонтактныйТелефон { get; set; }
-        public string КонтактныйEmail { get; set; }
-        public string Адрес { get; set; }
+        public int IDЗаказа { get; set; }
+        public string ТипЗаказа { get; set; }
+        public System.DateTime ДатаЗаказа { get; set; }
+        public Nullable<int> IDПоставщика { get; set; }
+        public Nullable<int> IDКлиента { get; set; }
+        public string СтатусЗаказа { get; set; }
+        public decimal ОбщаяСумма { get; set; }
     
+        public virtual Клиенты Клиенты { get; set; }
+        public virtual Поставщики Поставщики { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Заказы> Заказы { get; set; }
+        public virtual ICollection<РезервыТоваров> РезервыТоваров { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<РасходныеНакладные> РасходныеНакладные { get; set; }
+        public virtual ICollection<ЭлементыЗаказа> ЭлементыЗаказа { get; set; }
     }
 }

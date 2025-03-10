@@ -3,14 +3,14 @@ using System.Web.Http;
 using static WebApiWM.IAuthService;
 using System.Web.Mvc;
 using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
-using Auth0.ManagementApi.Models.Rules;
+using WebApiWM;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApiWM.Controllers
 {
     [System.Web.Http.RoutePrefix("api/auth")]
     public class AuthController : ApiController
     {
-
         private readonly IAuthService _authService;
 
         public AuthController(IAuthService authService)
@@ -22,28 +22,22 @@ namespace WebApiWM.Controllers
         [System.Web.Http.Route("login")]
         public IHttpActionResult Login([FromBody] LoginRequest request)
         {
-            if (request == null || string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
-                return BadRequest("Invalid request data.");
-
-            var token = _authService.Authenticate(request.Username, request.Password);
-            if (token == null)
+            var user = _authService.Authenticate(request.Username, request.Password);
+            if (user == null)
                 return Unauthorized();
 
-            return Ok(new { Token = token });
+            return Ok(user);
         }
 
         [HttpPost]
         [System.Web.Http.Route("login-2fa")]
         public IHttpActionResult LoginWith2FA([FromBody] Login2FARequest request)
         {
-            if (request == null || string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Token))
-                return BadRequest("Invalid request data.");
-
-            var token = _authService.AuthenticateWith2FA(request.Username, request.Token);
-            if (token == null)
+            var user = _authService.AuthenticateWith2FA(request.Username, request.Token);
+            if (user == null)
                 return Unauthorized();
 
-            return Ok(new { Token = token });
+            return Ok(user);
         }
     }
 }

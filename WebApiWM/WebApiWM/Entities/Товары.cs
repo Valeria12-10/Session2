@@ -17,6 +17,8 @@ namespace WebApiWM.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Товары()
         {
+            this.РезервыТоваров = new HashSet<РезервыТоваров>();
+            this.ЭлементыЗаказа = new HashSet<ЭлементыЗаказа>();
             this.ЭлементыИнвентаризации = new HashSet<ЭлементыИнвентаризации>();
             this.ЭлементыПриходнойНакладной = new HashSet<ЭлементыПриходнойНакладной>();
             this.ЭлементыРасходнойНакладной = new HashSet<ЭлементыРасходнойНакладной>();
@@ -32,6 +34,10 @@ namespace WebApiWM.Entities
         public string СерийныйНомер { get; set; }
         public Nullable<int> МинимальныйЗапас { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<РезервыТоваров> РезервыТоваров { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ЭлементыЗаказа> ЭлементыЗаказа { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ЭлементыИнвентаризации> ЭлементыИнвентаризации { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

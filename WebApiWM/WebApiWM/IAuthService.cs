@@ -3,41 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebApiWM.Entities;
+using WebApiWM.Models;
 
 namespace WebApiWM
+{
+    public interface IAuthService
     {
-        public interface IAuthService 
+        R_User Authenticate(string username, string password);
+        R_User AuthenticateWith2FA(string username, string token);
+    }
+
+
+    public class AuthService : IAuthService
+    {
+        private readonly СкладыEntities _context;
+
+        public AuthService(СкладыEntities context)
         {
-            string Authenticate(string username, string password);
-            string AuthenticateWith2FA(string username, string token);
+            _context = context;
         }
 
-        public class AuthService : IAuthService
+        public R_User Authenticate(string username, string password)
         {
-            private readonly List<Пользователи> _users = new List<Пользователи>
-    {
-        new Пользователи { IDПользователя = 1, ИмяПользователя = "admin", ХэшПароля = "hashed_password_1", Роль = "Администратор" },
-        new Пользователи { IDПользователя = 2, ИмяПользователя = "storekeeper", ХэшПароля = "hashed_password_2", Роль = "Кладовщик" }
-    };
+            // Ищем пользователя в базе данных
+            var пользователь = _context.Пользователи
+                .SingleOrDefault(u => u.ИмяПользователя == username && u.ХэшПароля == password);
 
-            public string Authenticate(string username, string password)
-            {
-                var user = _users.SingleOrDefault(u => u.ИмяПользователя == username && u.ХэшПароля == password);
-                if (user == null)
-                    return null;
+            if (пользователь == null)
+                return null;
 
-                // Генерация JWT-токена (упрощенно)
-                return "generated_jwt_token";
-            }
+            // Возвращаем объект R_User
+            return new R_User(пользователь);
+        }
 
-            public string AuthenticateWith2FA(string username, string token)
-            {
-                var user = _users.SingleOrDefault(u => u.ИмяПользователя == username);
-                if (user == null || token != "valid_2fa_token")
-                    return null;
+        public R_User AuthenticateWith2FA(string username, string token)
+        {
+            // Ищем пользователя в базе данных
+            var пользователь = _context.Пользователи
+                .SingleOrDefault(u => u.ИмяПользователя == username);
 
-                // Генерация JWT-токена (упрощенно)
-                return "generated_jwt_token";
-            }
+            // Проверяем токен (здесь должна быть логика проверки 2FA)
+            if (пользователь == null || token != "valid_2fa_token")
+                return null;
+
+            // Возвращаем объект R_User
+            return new R_User(пользователь);
         }
     }
+}

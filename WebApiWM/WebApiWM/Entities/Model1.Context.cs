@@ -13,10 +13,10 @@ namespace WebApiWM.Entities
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WarehouseManagementEntities : DbContext
+    public partial class СкладыEntities : DbContext
     {
-        public WarehouseManagementEntities()
-            : base("name=WarehouseManagementEntities")
+        public СкладыEntities()
+            : base("name=СкладыEntities")
         {
         }
     
@@ -25,15 +25,18 @@ namespace WebApiWM.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Заказы> Заказы { get; set; }
         public virtual DbSet<Инвентаризация> Инвентаризация { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }
         public virtual DbSet<Пользователи> Пользователи { get; set; }
         public virtual DbSet<Поставщики> Поставщики { get; set; }
         public virtual DbSet<ПриходныеНакладные> ПриходныеНакладные { get; set; }
         public virtual DbSet<РасходныеНакладные> РасходныеНакладные { get; set; }
+        public virtual DbSet<РезервыТоваров> РезервыТоваров { get; set; }
         public virtual DbSet<Склады> Склады { get; set; }
         public virtual DbSet<Товары> Товары { get; set; }
+        public virtual DbSet<ЭлементыЗаказа> ЭлементыЗаказа { get; set; }
         public virtual DbSet<ЭлементыИнвентаризации> ЭлементыИнвентаризации { get; set; }
         public virtual DbSet<ЭлементыПриходнойНакладной> ЭлементыПриходнойНакладной { get; set; }
         public virtual DbSet<ЭлементыРасходнойНакладной> ЭлементыРасходнойНакладной { get; set; }

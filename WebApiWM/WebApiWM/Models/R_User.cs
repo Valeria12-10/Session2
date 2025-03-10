@@ -7,15 +7,17 @@ using Auth0.ManagementApi.Models;
 namespace WebApiWM.Models
 {
 
-    public class User
+    public class R_User
     {
-        public User(User юзер)
+        
+        public R_User(Entities.Пользователи юзер)
         {
             IDПользователя = юзер.IDПользователя;
             ИмяПользователя = юзер.ИмяПользователя;
             ХэшПароля = юзер.ХэшПароля;
             Email = юзер.Email;          
             Роль = юзер.Роль;
+            Фото = юзер.Фото;
 
         }
         public int IDПользователя { get; set; }
@@ -23,5 +25,6 @@ namespace WebApiWM.Models
         public string Email { get; set; }
         public string ХэшПароля { get; set; }
         public string Роль { get; set; }
+        public byte[] Фото { get; set; }
     }
 }

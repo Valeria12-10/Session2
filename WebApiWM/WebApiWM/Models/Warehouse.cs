@@ -15,14 +15,14 @@ namespace WebApiWM.Models
             Название = склады.Название;
             Адрес = склады.Адрес;
             ТипСклада = склады.ТипСклада;
-            ЗоныХранения = склады.ЗоныХранения;
-
+            ЗонаХранения = склады.ЗонаХранения;
+        
 
         }
         public int IDСклада { get; set; }
         public string Название { get; set; }
         public string Адрес { get; set; }
         public string ТипСклада { get; set; }
-        public string ЗоныХранения { get; set; }
+        public string ЗонаХранения { get; set; }
     }
 }
